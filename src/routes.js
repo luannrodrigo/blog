@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 // import dos controllers
 import UserController from './app/controllers/UserController';
+
 // constantes
 const routes = new Router();
 
