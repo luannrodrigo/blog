@@ -3,6 +3,7 @@ import { Router } from 'express';
 // import dos controllers
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
+import PostController from './app/controllers/PostController';
 
 // import middlewares
 import authMiddleware from './app/middleware/auth';
@@ -12,6 +13,7 @@ const routes = new Router();
 
 // Rotas
 routes.post('/sessions', SessionController.store);
+routes.post('/posts', PostController.store);
 
 // load authentication middlewares
 routes.use(authMiddleware);
