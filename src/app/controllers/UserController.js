@@ -43,10 +43,11 @@ class UserController {
 				.when('oldPassword', (oldPassword, field) =>
 					oldPassword ? field.required() : field
 				),
-			confirmPassword: Yup.string().when('password', (password, field) =>
+			confirmPassowrd: Yup.string().when('password', (password, field) =>
 				password ? field.required().oneOf([Yup.ref('password')]) : field
 			),
 		});
+
 		/* check if datas sendind from method post is agree with schema validations */
 		if (!(await schema.isValid(req.body))) {
 			return res.status(400).json({ error: 'Validation fails.' });
@@ -55,6 +56,29 @@ class UserController {
 		const { email, oldPassword } = req.body;
 
 		const user = await User.findByPk(req.userId);
+
+		/* check if email updated is equal email in database */
+		if (email !== user.email) {
+			const userExist = await User.findOne({
+				where: { email: req.body.email },
+			});
+
+			/* check if email exist in database */
+			if (userExist) {
+				return res.status(400).json({ error: 'User already existy' });
+			}
+		}
+		/* check if old password write and match with database */
+		if (oldPassword && !(await user.checkPassword(oldPassword))) {
+			return res.status(401).json({ error: 'Password do not match' });
+		}
+		const { id, name } = await user.update(req.body);
+
+		return res.json({
+			id,
+			name,
+			email,
+		});
 	}
 }
 
