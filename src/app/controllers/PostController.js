@@ -2,9 +2,9 @@ import Post from '../models/Post';
 
 class PostController {
 	async store(req, res) {
-		const { post } = await Post.create(req.body);
+		const { title, post } = await Post.create(req.body);
 
-		return res.json(post);
+		return res.json({ title, post });
 	}
 
 	async index(req, res) {

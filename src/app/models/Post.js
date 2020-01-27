@@ -4,6 +4,7 @@ class Post extends Model {
 	static init(sequelize) {
 		super.init(
 			{
+				title: Sequelize.STRING,
 				post: Sequelize.STRING,
 				created_at: Sequelize.DATE,
 				updated_at: Sequelize.DATE,
