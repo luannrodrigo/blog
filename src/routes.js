@@ -23,6 +23,7 @@ routes.post('/users', UserController.store);
 routes.put('/users', UserController.update);
 
 routes.post('/posts', PostController.store);
+routes.put('/posts/:id', PostController.update);
 routes.delete('/posts/:id', PostController.delete);
 
 export default routes;

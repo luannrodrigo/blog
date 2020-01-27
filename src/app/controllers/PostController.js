@@ -29,6 +29,14 @@ class PostController {
 		return res.json(post);
 	}
 
+	async update(req, res) {
+		const { id, title, post } = await Post.update(req.body, {
+			where: { id: req.params.id },
+		});
+
+		return res.json({ id, title, post });
+	}
+
 	async delete(req, res) {
 		const postId = await Post.destroy({ where: { id: req.params.id } });
 
