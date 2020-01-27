@@ -13,12 +13,16 @@ const routes = new Router();
 
 // Rotas
 routes.post('/sessions', SessionController.store);
-routes.post('/posts', PostController.store);
+routes.get('/posts', PostController.index);
+routes.get('/posts/:id', PostController.show);
 
 // load authentication middlewares
 routes.use(authMiddleware);
 
 routes.post('/users', UserController.store);
 routes.put('/users', UserController.update);
+
+routes.post('/posts', PostController.store);
+routes.delete('/posts/:id', PostController.delete);
 
 export default routes;

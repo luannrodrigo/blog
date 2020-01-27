@@ -6,7 +6,7 @@ class Post extends Model {
 			{
 				post: Sequelize.STRING,
 				created_at: Sequelize.DATE,
-				update_at: Sequelize.DATE,
+				updated_at: Sequelize.DATE,
 			},
 			{
 				sequelize,
@@ -15,11 +15,6 @@ class Post extends Model {
 
 		// retorna o modulo init
 		return this;
-	}
-
-	//  relacionamento com a table user
-	static associate(models) {
-		this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
 	}
 }
 
