@@ -6,6 +6,7 @@ class Post extends Model {
 			{
 				title: Sequelize.STRING,
 				post: Sequelize.STRING,
+				user_id: Sequelize.INTEGER,
 				created_at: Sequelize.DATE,
 				updated_at: Sequelize.DATE,
 			},

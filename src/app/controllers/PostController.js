@@ -2,9 +2,15 @@ import Post from '../models/Post';
 
 class PostController {
 	async store(req, res) {
-		const { title, post } = await Post.create(req.body);
+		const formData = {
+			user_id: req.userId,
+			title: req.body.title,
+			post: req.body.post,
+		};
 
-		return res.json({ title, post });
+		const { id, user_id, title, post } = await Post.create(formData);
+
+		return res.json({ id, user_id, title, post });
 	}
 
 	async index(req, res) {
@@ -13,6 +19,11 @@ class PostController {
 		const posts = await Post.findAll({
 			order: ['created_at'],
 			attributes: ['id', 'post', 'created_at', 'updated_at'],
+			include: {
+				Model: 'User',
+				as: 'user_id',
+				attributes: ['id', 'name'],
+			},
 			limit: 20,
 			offset: (page - 1) * 20,
 		});
